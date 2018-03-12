@@ -7,9 +7,10 @@ A subsequent module lets you practice the ACCUMULATOR pattern in another classic
    IN GRAPHICS:   x = x + pixels
 
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Rion Sato.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
+import math
 
 # ----------------------------------------------------------------------
 # Students: As you work each of these problems, ask yourself:
@@ -31,7 +32,7 @@ def main():
 def run_test_sum_more_cosines():
     """ Tests the   sum_more_cosines   function. """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
+    # DONE: 2. Implement this TEST function.
     #   It TESTS the  sum_more_cosines  function defined below.
     #   Include at least **   3   ** tests (we wrote one for you).
     #
@@ -51,6 +52,7 @@ def run_test_sum_more_cosines():
     #     and the ACTUAL answer returned when you call the function.
     #     Follow the same form as in the test case we provided below.
     # ------------------------------------------------------------------
+
     print()
     print('--------------------------------------------------')
     print('Testing the   sum_more_cosines   function:')
@@ -66,7 +68,15 @@ def run_test_sum_more_cosines():
     # TO DO: 2 (continued).
     # Below this comment, add 2 more test cases of your own choosing.
     # ------------------------------------------------------------------
+    expected = -0.23582  # This is APPROXIMATELY the correct answer.
+    answer = sum_more_cosines(0, 5)
+    print('Test 2 expected:', expected)
+    print('       actual:  ', answer)
 
+    expected = 'somthing_error'  # This is APPROXIMATELY the correct answer.
+    answer = sum_more_cosines(-3, -5)
+    print('Test 3 expected:', expected)
+    print('       actual:  ', answer)
 
 def sum_more_cosines(m, n):
     """
@@ -83,7 +93,7 @@ def sum_more_cosines(m, n):
          which is approximately 0.02082.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #   That is called TEST-DRIVEN DEVELOPMENT (TDD).
     #
@@ -94,12 +104,19 @@ def sum_more_cosines(m, n):
     #   Just   range(blah)   where blah is a single variable.
     #   Reason: To ensure that you get more practice using variables.
     # ------------------------------------------------------------------
+    if(m < 0 or n < 0):
+        return 'error'
+    sum = 0
+    for i in range(n):
+        sum += math.cos(m+i)
+    sum += math.cos(n)
+    return sum
 
 
 def run_test_count_sines_from():
     """ Tests the   count_sines_from   function. """
     # ------------------------------------------------------------------
-    # TODO: 4. Implement this TEST function.
+    # DONE: 4. Implement this TEST function.
     #   It TESTS the  count_sines_from  function defined below.
     #   Include at least **   6   ** tests (we wrote one for you).
     #              ** Yes, 6 (six) tests. **
@@ -115,6 +132,18 @@ def run_test_count_sines_from():
     expected = 5
     answer = count_sines_from(3, 9)
     print('Test 1 expected:', expected)
+    print('       actual:  ', answer)
+
+    # Test 2:
+    expected = 2
+    answer = count_sines_from(0, 3)
+    print('Test 2 expected:', expected)
+    print('       actual:  ', answer)
+
+    # Test 3:
+    expected = 'something_error'
+    answer = count_sines_from(-2, 9)
+    print('Test 3 expected:', expected)
     print('       actual:  ', answer)
 
     # ------------------------------------------------------------------
@@ -143,13 +172,21 @@ def count_sines_from(m, n):
       -- count_sines_from(9, 9)  returns  1
     """
     # ------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # IMPORTANT: As in previous problems in this session,
     #   you must NOT use the 2 or 3-parameter versions
     #   of the RANGE expression, if you happen to know them.
     # ------------------------------------------------------------------
+    if (m < 0 or n < 0):
+        return 'error'
+    count = 0
+    for k in range(n+1):
+        if(k >= m):
+            if(math.sin(k+1) < 0.5):
+                count += 1
+    return count
 
 
 def run_test_count_sines_vs_cosines():
